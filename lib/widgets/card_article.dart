@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/common/navigation.dart';
 import 'package:news_app/common/styles.dart';
 import 'package:news_app/data/model/article.dart';
 import 'package:news_app/ui/article_detail_page.dart';
@@ -6,7 +7,7 @@ import 'package:news_app/ui/article_detail_page.dart';
 class CardArticle extends StatelessWidget {
   final Article article;
 
-  const CardArticle({required this.article});
+  const CardArticle({Key? key, required this.article}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,18 +20,15 @@ class CardArticle extends StatelessWidget {
           tag: article.urlToImage!,
           child: Image.network(
             article.urlToImage!,
-            width: 200,
+            width: 100,
           ),
         ),
         title: Text(
           article.title,
         ),
-        subtitle: Text(article.author ?? ""),
-        onTap: () => Navigator.pushNamed(
-          context,
-          ArticleDetailPage.routeName,
-          arguments: article,
-        ),
+        subtitle: Text(article.author ?? ''),
+        onTap: () =>
+            Navigation.intentWithData(ArticleDetailPage.routeName, article),
       ),
     );
   }
