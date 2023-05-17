@@ -31,14 +31,16 @@ class NotificationHelper {
     var initializationSettings = InitializationSettings(
         android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
 
-    await flutterLocalNotificationsPlugin.initialize(initializationSettings,
-        onDidReceiveNotificationResponse: (NotificationResponse details) async {
-      final payload = details.payload;
-      if (payload != null) {
-        print('notification payload: ' + payload);
-      }
-      selectNotificationSubject.add(payload ?? 'empty payload');
-    });
+    await flutterLocalNotificationsPlugin.initialize(
+      initializationSettings,
+      onDidReceiveNotificationResponse: (details) {
+        final payload = details.payload;
+        if (payload != null) {
+          print('notification payload: $payload');
+        }
+        selectNotificationSubject.add(payload ?? 'empty payload');
+      },
+    );
   }
 
   Future<void> showNotification(
@@ -58,8 +60,9 @@ class NotificationHelper {
 
     var iOSPlatformChannelSpecifics = const DarwinNotificationDetails();
     var platformChannelSpecifics = NotificationDetails(
-        android: androidPlatformChannelSpecifics,
-        iOS: iOSPlatformChannelSpecifics);
+      android: androidPlatformChannelSpecifics,
+      iOS: iOSPlatformChannelSpecifics,
+    );
 
     var titleNotification = "<b>Headline News</b>";
     var titleNews = articles.articles[0].title;
