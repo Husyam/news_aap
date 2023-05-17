@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class ArticlesResult {
   final String status;
   final int totalResults;
@@ -10,12 +8,6 @@ class ArticlesResult {
     required this.totalResults,
     required this.articles,
   });
-
-  Map<String, dynamic> toJson() => {
-        "status": status,
-        "totalResults": totalResults,
-        "articles": List<dynamic>.from(articles.map((x) => x.toJson())),
-      };
 
   factory ArticlesResult.fromJson(Map<String, dynamic> json) => ArticlesResult(
         status: json["status"],
@@ -29,6 +21,12 @@ class ArticlesResult {
                 article.publishedAt != null &&
                 article.content != null)),
       );
+
+  Map<String, dynamic> toJson() => {
+        "status": status,
+        "totalResults": totalResults,
+        "articles": List<dynamic>.from(articles.map((x) => x.toJson())),
+      };
 }
 
 class Article {
@@ -50,6 +48,16 @@ class Article {
     required this.content,
   });
 
+  factory Article.fromJson(Map<String, dynamic> json) => Article(
+        author: json["author"],
+        title: json["title"],
+        description: json["description"] ?? "-",
+        url: json["url"],
+        urlToImage: json["urlToImage"],
+        publishedAt: DateTime.parse(json["publishedAt"]),
+        content: json["content"],
+      );
+
   Map<String, dynamic> toJson() => {
         "author": author,
         "title": title,
@@ -59,14 +67,4 @@ class Article {
         "publishedAt": publishedAt?.toIso8601String(),
         "content": content,
       };
-
-  factory Article.fromJson(Map<String, dynamic> json) => Article(
-        author: json["author"],
-        title: json["title"],
-        description: json["description"],
-        url: json["url"],
-        urlToImage: json["urlToImage"],
-        publishedAt: DateTime.parse(json["publishedAt"]),
-        content: json["content"],
-      );
 }

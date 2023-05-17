@@ -15,7 +15,6 @@ class ApiService {
     // print(response.statusCode);
     if (response.statusCode == 200) {
       print(json.decode(response.body));
-
       return ArticlesResult.fromJson(json.decode(response.body));
     } else {
       throw Exception('Failed to load top headlines');

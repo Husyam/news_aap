@@ -37,15 +37,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'News APP',
+      title: 'News App',
       theme: ThemeData(
         colorScheme: Theme.of(context).colorScheme.copyWith(
               primary: primaryColor,
               onPrimary: Colors.black,
               secondary: secondaryColor,
             ),
-        //textTheme: myTextTheme,
-        appBarTheme: AppBarTheme(elevation: 0),
+        scaffoldBackgroundColor: Colors.white,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+        textTheme: myTextTheme,
+        appBarTheme: const AppBarTheme(elevation: 0),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             backgroundColor: secondaryColor,

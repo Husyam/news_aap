@@ -18,7 +18,7 @@ class BackgroundService {
 
   factory BackgroundService() => _instance ?? BackgroundService._internal();
 
-  void initializationIsolate() {
+  void initializeIsolate() {
     IsolateNameServer.registerPortWithName(
       port.sendPort,
       _isolateName,
@@ -35,6 +35,4 @@ class BackgroundService {
     _uiSendPort ??= IsolateNameServer.lookupPortByName(_isolateName);
     _uiSendPort?.send(null);
   }
-
-  void initializeIsolate() {}
 }

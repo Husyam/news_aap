@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/widgets.dart';
 import 'package:news_app/data/api/api_service.dart';
 import 'package:news_app/data/model/article.dart';

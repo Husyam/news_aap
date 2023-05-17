@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -52,11 +51,7 @@ class SettingsPage extends StatelessWidget {
                 return Switch.adaptive(
                   value: scheduled.isScheduled,
                   onChanged: (value) async {
-                    if (Platform.isIOS) {
-                      customDialog(context);
-                    } else {
-                      scheduled.scheduledNews(value);
-                    }
+                    scheduled.scheduledNews(value);
                   },
                 );
               },
